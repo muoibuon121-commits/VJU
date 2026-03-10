@@ -1,3 +1,3 @@
 # VJU
-BÀI TAP OOP - Dr.BUI HUY KIEN 
+Bài tập OOP - Dr. Bùi Huy Kiên  
 
