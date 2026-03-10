@@ -1,30 +1,30 @@
 import math
 import time 
 # CHAPTER 1: 
-# 1.1.Có bao nhiêu giây trong 42 phút 42 giây -> có bao nhiêu giây trong m phút n giây
+print("1.1.Có bao nhiêu giây trong 42 phút 42 giây -> có bao nhiêu giây trong m phút n giây")
 m = float(input("Nhập số phút: "))
 n = int(input("Nhập số giây: "))
 print(f"Số giây trong {m} phút và {n} giây là: {m*60+n}")
-# 1.2.Chuyển đổi 10 KM sang miles, biết 1 mile bằng 1.61 km -> nhập số x km sau đó chuyển sang mile/miles
+print("1.2.Chuyển đổi 10 KM sang miles, biết 1 mile bằng 1.61 km -> nhập số x km sau đó chuyển sang mile/miles")
 x = float(input("nhập số kilometers:"))
 y = x/1.61
 if y ==1:
     print(f"{x} km bằng {y} mile")
 else:
     print(f"{x} km bằng {y} miles") # khi bằng 1 sẽ là mile, trên và dưới 1 đều là miles
-# 1.3. Nếu bạn chạy 10 cây trong 42 phút và 42 giây thì trung bình tốc độ là bao nhiêu ? -> nhập khoảng cách chạy Q và thời gian chạy m.n 
+print(" 1.3. Nếu bạn chạy 10 cây trong 42 phút và 42 giây thì trung bình tốc độ là bao nhiêu ? -> nhập khoảng cách chạy Q và thời gian chạy m.n ")
 Q = float(input("Nhập số KM đã chạy:"))/1.61
 m = float(input("Nhập số phút đã chạy:"))
 n = float(input("NHập số giây đã chạy:"))
-print(f"PACE là {(m+n/60)/Q} mile/minutes !") # Tính PACE 
-print(f"Tốc độ trung bình là {(m*60+n)/Q} mile/seconds !") # Tính PACE 
-print(f"Tốc độ trung bình là {Q/((m*60+n)/3600):.2f} mile/hours !") # Tính SPEED / :.2f làm tròn cho đẹp :> 
+print(f"PACE là {(m+n/60)/Q} mile/minutes ") # Tính PACE 
+print(f"Tốc độ trung bình là {(m*60+n)/Q} mile/seconds ") # Tính PACE 
+print(f"Tốc độ trung bình là {Q/((m*60+n)/3600):.2f} mile/hours ") # Tính SPEED / :.2f làm tròn cho đẹp :> 
 # END CHAP 1 
 # CHAPTER 2
-# 2.1 Thể tích của hình có bán kính r là bao nhiêu ?
+print("2.1 Thể tích của hình có bán kính r là bao nhiêu ?")
 P = (float(input("nhập bán kính:"))**3)*(4/3)*math.pi
 print(f"thể tích của hình cầu là: {P:.2f}")
-# 2.1 Giá 1 cuốn sách là 24.95$, nhưng được giảm giá 40%, phí vận chuyển là 3$ cho 1 cuốn đầu và các cuốn sau là 75 cents -> nhập số sách cần mua
+print("2.1 Giá 1 cuốn sách là 24.95$, nhưng được giảm giá 40%, phí vận chuyển là 3$ cho 1 cuốn đầu và các cuốn sau là 75 cents -> nhập số sách cần mua")
 sach = (input("Nhập số sách cần mua:"))
 if sach.isdigit():
     S = int(sach)
@@ -34,7 +34,7 @@ if sach.isdigit():
         print("Em không bán sách nửa cuốn sách anh ạ!")
 else:
     print("Em không bán nửa cuốn đâu !")
-# 2.3 Nếu rời khỏi nhà lúc 6h52 và chạy 1 dặm dễ với PACE là 8p15s và 3 dặm sau đó với PACE 7p12s và thêm 1 dặm dễ nữa thì mấy giờ về đến nhà ? -> chuyển về nhập biến 
+print("2.3 Nếu rời khỏi nhà lúc 6h52 và chạy 1 dặm dễ với PACE là 8p15s và 3 dặm sau đó với PACE 7p12s và thêm 1 dặm dễ nữa thì mấy giờ về đến nhà ? -> chuyển về nhập biến") 
 TIME1 = float(input("Nhập giờ xuất phát: "))
 TIME2 = float(input("Nhập phút xuất phát: ")) 
 EASYRUN1 = float(input("Nhập số dặm chạy dễ ban đầu: "))
@@ -49,6 +49,7 @@ if TIME1 >= 0 and TIME2 >= 0 and EASYRUN1 >0 and MIDRUN >= 0 and EASYRUN2 >= 0:
 else: 
     print("Nhập sai rồi bố ơi !")
 #END CHAP 2
+print ("3.1")
 # CHAPTTER 3: 
 # 3.1 
 # + - - - - + - - - - + -> 2 hàng 2 cột -> gồm 1 dấu cộng + 4 dấu trừ + 4 dấu cộng .....
@@ -73,7 +74,7 @@ def ve1():
         print(XuongDong)
     print(Dong)
 ve1()
-# 3.2 Viết 1 hàm vẽ lưới tương tự với 4 hàng và 4 cột -> chuyển sang dạng n cột, n hàng
+print(" 3.2 Viết 1 hàm vẽ lưới tương tự với 4 hàng và 4 cột -> chuyển sang dạng n cột, n hàng ")
 S_LINE = '+' + '-'*4 
 E_LINE = '+'
 S_BLOCK = '|' + ' '*4 
@@ -95,6 +96,7 @@ def ve2():
 ve2()
 # END CHAP 3
 # CHAPPTER 5:
+print("5.1")
 sumtime = time.time()
 giây = 60
 phút = 60*giây
