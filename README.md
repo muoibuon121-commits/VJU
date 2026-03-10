@@ -1,3 +1,3 @@
 # VJU
-Bài tập OOP - Dr. Bùi Huy Kiên  
+Bài tập OOP - CSE 3011 - Dr. Bùi Huy Kiên  
 
