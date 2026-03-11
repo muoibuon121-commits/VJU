@@ -9,10 +9,15 @@ Bài tập OOP - CSE 3011 - TS. Bùi Huy Kiên
 # Structure
 ``` 
 |- Week1/
-|  `- OOPbuoi1.py - Print Hello World
+|  |- OOPbuoi1.py - Print Hello World
 `- Week2
    |- OOPbuoi2.py - Time conversion, distance conversion, pace, speed
                   - Sphere volume, wholesale cost, breakfast time
                   - Draw 2x2 and 4x4 text grids
                   - Epoch time, days since 01/01/1970
 ```
+# How to run ? - Run the ur own way :> !
+# Author 
+Name: Trần Ngô Tiến Đạt
+VJU's ID: 25112231
+DM: None 
