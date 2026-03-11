@@ -112,3 +112,4 @@ số_giây = int(giây_còn_lại)
 print(f"Số ngày đã trôi qua kể từ Epoch: {số_ngày} ngày")
 print(f"Thời gian hiện tại (GMT): {số_giờ:02d}:{số_phút:02d}:{số_giây:02d}") 
 print(f"Thời gian hiện tại (Việt Nam): {(số_giờ + 7) % 24:02d}:{số_phút:02d}:{số_giây:02d}")
+# END CHAP 5 
