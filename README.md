@@ -5,4 +5,14 @@ Bài tập OOP - CSE 3011 - TS. Bùi Huy Kiên
 > - ***IDE*** ` ANTIGRAVITY `
 > - ***Lang*** ` Python: 3.x `
 > - ***Interpreter*** ` Standard Python Environment `
-> - ***Modlues/Libraries** ` time, math,.. `
+> - ***Modlues/Libraries*** ` time, math,.. `
+# Structure
+``` 
+|- Week1/
+|  `- OOPbuoi1.py - Print Hello World
+`- Week2
+   |- OOPbuoi2.py - Time conversion, distance conversion, pace, speed
+                  - Sphere volume, wholesale cost, breakfast time
+                  - Draw 2x2 and 4x4 text grids
+                  - Epoch time, days since 01/01/1970
+```
