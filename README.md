@@ -18,6 +18,6 @@ Bài tập OOP - CSE 3011 - TS. Bùi Huy Kiên
 ```
 # How to run ? - Run the ur own way :> !
 # Author 
-Name: Trần Ngô Tiến Đạt
-VJU's ID: 25112231
-DM: None 
+- Name: Trần Ngô Tiến Đạt
+- VJU's ID: 25112231
+- DM: None 
