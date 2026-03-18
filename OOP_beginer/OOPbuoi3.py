@@ -153,15 +153,12 @@ if __name__ == '__main__':
 
 
 # BÀI 5: THINK PYTHON: CHAP 15
-
-# Định nghĩa điểm -> Sử dụng để định dạng cả Circle và Rect 
 class Point:
     def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
      def __str__(self):
         return f"({self.x}, {self.y})"
-# Viết lớp, Hàm Rect 
 class Rectangle:
     def __init__(self, corner, width, height):
         self.corner = corner
@@ -172,12 +169,10 @@ class Circle:
         self.center = center
         self.radius = radius
 def distance(p1, p2):
-    # Khoảng cách giữa hai điểm p1, p2  -> căn tổng bình của hiệu 2 thứ -> điểm cần tính khoảng cách
-    # và điểm tâm của hình tròn 
     return math.sqrt((p1.x - p2.x)**2 + (p1.y - p2.y)**2)
 def point_in_circle(circle, point):
     d = distance(circle.center, point)
-    return d <= circle.radius # Hình sẽ đúng nhiều kết quả bé hơn bằng Radius 
+    return d <= circle.radius 
 def rect_in_circle(circle, rect):
     p1 = rect.corner
     p2 = Point(rect.corner.x + rect.width, rect.corner.y)  
@@ -235,7 +230,7 @@ class NhanVien:
     def inTTin(self):
         print("THÔNG TIN NHÂN VIÊN")
         print(f"Tên nhân viên : {self.tenNhanVien}")
-        # Dùng :,.0f để định dạng tiền tệ cho dễ nhìn (ví dụ: 10,000,000)
+        # Dùng :,.0f để định dạng tiền tệ cho dễ nhìn 
         print(f"Lương cơ bản  : {self.luongCoBan:,.0f} VNĐ")
         print(f"Hệ số lương   : {self.heSoLuong}")
         print(f"Tổng lương    : {self.tinhLuong():,.0f} VNĐ")
