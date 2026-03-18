@@ -1,4 +1,42 @@
-import math
+# Bài 1: tính điểm, khoảng cách giữa 2 điểm 
+import math 
+class point:
+    def __init__ (self, x, y):
+        self.x = x 
+        self.y = y 
+        print(f"Đã tạo điểm tại ({self.x}, {self.y})")
+    def distance(self, x1, y1):
+        return math.hypot(self.x - x1, self.y - y1)
+if __name__ == '__main__':
+    x = float(input("Nhập tọa độ x của điểm A : "))
+    y = float(input("Nhập tọa độ y của điểm A : "))
+    Tâm = point (0,0)
+    my_circle = point(x, y)
+    distance1 = math.hypot(x, y)
+    x1 = float(input("Nhập tọa độ x của điểm B: "))
+    y1 = float(input("Nhập tọa độ y của điểm B: "))
+    distance2 = my_circle.distance(x1, y1)
+    print(f"Khoảng cách từ điểm ({x}, {y}) đến gốc toạ độ O là: {distance1:.2f}")
+    print(f"Khoảng cách từ điểm B ({x1}, {y1}) đến điểm A ({x}, {y}) là: {distance2:.2f}")
+# Bài 2+3: Siêu Nhân Gao 
+team = []
+class Siêu_Nhân:
+    def __init__ (self, ten, vu_khi, mau_sac):
+        self.ten = ten 
+        self.vu_khi = vu_khi
+        self.mau_sac = mau_sac
+    def __str__(self):
+        return f"Gao: {self.ten}, Vũ khí: {self.vu_khi}, Màu sắc: {self.mau_sac}"
+if __name__ == '__main__':
+    số_siêu_nhân = int(input("Nhập số lượng siêu nhân Gao: "))
+    for i in range(số_siêu_nhân):
+        print(f"Nhập thông tin siêu nhân Gao {i+1}:")
+        siêu_nhân = Siêu_Nhân(input("Nhập tên siêu nhân: "), input("Nhập vũ khí của siêu nhân: "), input("Nhập màu sắc của siêu nhân: "))
+        team.append(siêu_nhân)
+    print("\n DANH SÁCH SIÊU NHÂN")
+    for s in team:
+        print(s)
+
 # Định nghĩa điểm -> Sử dụng để định dạng cả Circle và Rect 
 class Point:
     def __init__(self, x=0, y=0):
