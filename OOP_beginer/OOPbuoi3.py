@@ -36,6 +36,123 @@ if __name__ == '__main__':
     print("\n DANH SÁCH SIÊU NHÂN")
     for s in team:
         print(s)
+# Bài 4:
+# a, bài tập con chó 
+chuồng_chó = []
+class chó:
+    def __init__(self, tên, màu, loài, cảm_xúc):
+        self.tên = tên
+        self.màu = màu
+        self.loài = loài
+        self.cảm_xúc = cảm_xúc
+    def __str__(self):
+        return f"Tên: {self.tên}, Loài: {self.loài}, Màu: {self.màu}, Cảm xúc: {self.cảm_xúc}"
+    def chọc_chó(self):
+        quyết_định = input(f"Bạn muốn chọc, cho ăn hay vỗ {self.tên}? (chọc/cho ăn/vỗ): ")
+        if quyết_định.lower() == "chọc":
+            self.cảm_xúc = "tức giận"
+            return f"Bạn đã chọc {self.tên}, nó đang {self.cảm_xúc} và sắp cắn bạn, chạy nhanh lên =)) !"
+        elif quyết_định.lower() == "cho ăn":
+            self.cảm_xúc = "hạnh phúc"
+            return f"Bạn đã cho ăn {self.tên}, nó đang {self.cảm_xúc} và vẫy đuôi !"
+        elif quyết_định.lower() == "vỗ":
+            self.cảm_xúc = "vui vẻ"
+            return f"Bạn đã vỗ {self.tên}, nó đang {self.cảm_xúc} và lăn ngửa cho bạn xoa bụng !"
+        else:
+            return "Quyết định không hợp lệ. Hãy chọn 'chọc', 'cho ăn' hoặc 'vỗ'."
+    def sủa(self):
+        return f"{self.tên} đang sủa: Gâu gâu!"
+    def ăn(self, thức_ăn):
+        self.thức_ăn = thức_ăn
+        return f"{self.tên} đang ăn {thức_ăn}."
+    def chơi(self, đồ_chơi):
+        self.đồ_chơi = đồ_chơi
+        return f"{self.tên} đang chơi với {đồ_chơi}."
+if __name__ == '__main__':
+    số_chó = int(input("Nhập số lượng chó: "))
+    for i in range(số_chó):
+        print(f"\n--- Nhập thông tin bé {i+1} ---")
+        cờ_hó = chó(input("Nhập tên chó: "), input("Nhập màu chó: "), input("Nhập loài chó: "), "bình thường")
+        chuồng_chó.append(cờ_hó)
+    print("\n=== DANH SÁCH CHUỒNG CHÓ ===")
+    for c in chuồng_chó:
+        print(c)
+    if len(chuồng_chó) > 0:
+        print("tương tác")
+        print(chuồng_chó[0].chọc_chó())
+# b, bài tập ô tô 
+class car:
+    def __init__(self, hãng, kích_thước, màu, giá):
+        self.hãng = hãng
+        self.kích_thước = kích_thước
+        self.màu = màu
+        self.giá = giá
+    def __str__(self):
+        return f"Đã tạo xe {self.hãng} với kích thước {self.kích_thước}, màu {self.màu} và giá {self.giá}"
+    def tốc_độ(self):
+        điều_chỉnh_tốc_độ = input("Bạn muốn tăng tốc hay giảm tốc ? (tăng/giảm): ")
+        if điều_chỉnh_tốc_độ.lower() == "tăng":
+            return f"Bạn đã tăng tốc"
+        elif điều_chỉnh_tốc_độ.lower() == "giảm":
+            return f"Bạn đã giảm tốc"
+        else:
+            return "Quyết định không hợp lệ. Hãy chọn 'tăng' hoặc 'giảm'."
+    def đâm(self):
+        print("xe đăng trước chạy hơi láo !")
+        suy_nghĩ = input("Bạn có muốn đâm không ? (có/không): ")
+        if suy_nghĩ.lower() == "có":
+            return f"Bạn đã quyết định đâm, xe đã có bảo hiểm thân vỏ, yên tâm !"
+        elif suy_nghĩ.lower() == "không":
+            return f"Bạn đã quyết định không đâm, thôi a di đà phật"
+        else:
+            return "Quyết định không hợp lệ. Hãy chọn 'có' hoặc 'không'."
+if __name__ == '__main__':
+    số_xe = int(input("Nhập số lượng xe: "))
+    for i in range(số_xe):
+        print(f"Nhập thông tin xe {i+1}:")
+        xe = car(input("Hãng xe: "), input("Kích thước: "), input("Màu: "), input("Giá: "))
+        print(xe)
+        if i == 0:  # Tương tác với xe đầu tiên
+            print(xe.tốc_độ())
+            print(xe.đâm())
+# c, Tài khoản ngân hàng
+class bank_account:
+    def __init__(self, tên_tài_khoản, số_tài_khoản, ngân_hàng, số_dư):
+        self.tên_tài_khoản = tên_tài_khoản
+        self.số_tài_khoản = số_tài_khoản
+        self.ngân_hàng = ngân_hàng
+        self.số_dư = số_dư
+    def __str__(self):
+        return f"Tài khoản {self.tên_tài_khoản} tại ngân hàng {self.ngân_hàng} với số tài khoản {self.số_tài_khoản} có số dư {self.số_dư}"
+    def thao_tác(self):
+        chọn = input("Bạn muốn rút tiền, gửi tiền hay kiểm tra số dư? (rút/gửi/kiểm tra)")
+        if chọn.lower() == "rút":
+            số_tiền = float(input("Nhập số tiền bạn muốn rút: "))
+            if số_tiền > self.số_dư:
+                return "Số dư không đủ để rút."
+            else:
+                self.số_dư -= số_tiền
+                return f"Bạn đã rút {số_tiền}. Số dư hiện tại: {self.số_dư}"
+        elif chọn.lower() == "gửi":
+            số_tiền = float(input("Nhập số tiền bạn muốn gửi: "))
+            self.số_dư += số_tiền
+            return f"Bạn đã gửi {số_tiền}. Số dư hiện tại: {self.số_dư}"
+        elif chọn.lower() == "kiểm tra":
+            return f"Số dư hiện tại của bạn là: {self.số_dư}"
+        else:
+            return "Lựa chọn không hợp lệ. Hãy chọn 'rút', 'gửi' hoặc 'kiểm tra'."
+if __name__ == '__main__':
+    số_tài_khoản = int(input("Nhập số lượng tài khoản: "))
+    for i in range(số_tài_khoản):
+        print(f"Nhập thông tin tài khoản {i+1}:")
+        tài_khoản = bank_account(input("Tên tài khoản: "), input("Số tài khoản: "), input("Ngân hàng: "), float(input("Số dư: ")))
+        print(tài_khoản)
+        if i == 0:  
+            print(tài_khoản.thao_tác())
+
+
+
+# BÀI 5: THINK PYTHON: CHAP 15
 
 # Định nghĩa điểm -> Sử dụng để định dạng cả Circle và Rect 
 class Point:
