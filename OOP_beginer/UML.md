@@ -1,33 +1,31 @@
-![Sơ đồ Hàng hóa](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/plantuml/plantuml/master/src/docs/classes.puml&fmt=svg&inline=true&uml=
-@startuml
-skinparam classAttributeIconSize 0
-class HangHoa {
-  #ma_hang: String
-  #ten_hang: String
-  #nha_sx: String
-  #gia: float
-  +in_ttin()
-}
-class HangDienMay {
-  -tg_baohanh: int
-  -dien_ap: int
-  -cong_suat: int
-}
-class HangSanhSu {
-  -loai_nguyenlieu: String
-}
-class HangThucPham {
-  -ngay_sx: String
-  -ngay_hethan: String
-}
-class QLHangHoa {
-  +danh_sach: List
-  +them_hang()
-  +tim_kiem()
-}
-HangHoa <|-- HangDienMay
-HangHoa <|-- HangSanhSu
-HangHoa <|-- HangThucPham
-QLHangHoa o-- HangHoa
-@enduml
-)
+``` mermaid
+classDiagram
+    direction TB
+    class HangHoa {
+        #String _ma_hang
+        #String _ten_hang
+        #float _gia
+        +in_ttin()
+    }
+    class HangDienMay {
+        -int __tg_baohanh
+        -int __dien_ap
+        +in_ttin()
+    }
+    class HangSanhSu {
+        -String __loai_nguyenlieu
+        +in_ttin()
+    }
+    class HangThucPham {
+        -String __ngay_hethan
+        +in_ttin()
+    }
+    class QLHangHoa {
+        +List danh_sach
+        +them_hang(HangHoa)
+    }
+
+    HangHoa <|-- HangDienMay : Thừa kế
+    HangHoa <|-- HangSanhSu : Thừa kế
+    HangHoa <|-- HangThucPham : Thừa kế
+    QLHangHoa o-- HangHoa : Quản lý
