@@ -1,35 +1,81 @@
 ```mermaid
 classDiagram
-    class Point {
-        +float x
-        +float y
-        +__init__(x, y)
-        +__str__() String
-    }
-
-    class LineSegment {
-        -Point __d1
-        -Point __d2
-        +__init__(*args)
-        +getD1() Point
-        +getD2() Point
-        +__str__() String
-    }
-
-    class NhanVien {
-        +int LUONG_MAX$
-        -String __ten_nv
-        -int __luong_cb
-        -float __he_so
-        +__init__(ten_nv, luong_cb, he_so)
-        +set_he_so(he_so)
-        +get_ten_nv() String
-        +get_luong_cb() int
-        +get_he_so() float
-        +tinh_luong() float
+    %% =======================
+    %% Khối Quản lý Hàng hóa
+    %% =======================
+    class HangHoa {
+        #ma_hang: String
+        #ten_hang: String
+        #nha_sx: String
+        #gia: float
         +in_ttin()
-        +tang_luong() bool
     }
 
-    LineSegment "1" *-- "2" Point : chứa (Composition)
-```
+    class HangDienMay {
+        -tg_baohanh: int
+        -dien_ap: int
+        -cong_suat: int
+        +in_ttin()
+    }
+
+    class HangSanhSu {
+        -loai_nguyenlieu: String
+        +in_ttin()
+    }
+
+    class HangThucPham {
+        -ngay_sx: String
+        -ngay_hethan: String
+        +in_ttin()
+    }
+
+    class QLHangHoa {
+        +danh_sach: List
+        +them_hang(hang: HangHoa)
+        +hien_thi()
+        +tim_kiem(ten_tim: String)
+    }
+
+    HangHoa <|-- HangDienMay
+    HangHoa <|-- HangSanhSu
+    HangHoa <|-- HangThucPham
+    QLHangHoa "1" o-- "0..*" HangHoa : quan_ly
+
+    %% =======================
+    %% Khối Quản lý Cán bộ
+    %% =======================
+    class CanBo {
+        -hoten: String
+        -tuoi: int
+        -gioitinh: String
+        -diachi: String
+        +get_hoten(): String
+        +inTTin()
+    }
+
+    class CongNhan {
+        -bac: int
+        +inTTin()
+    }
+
+    class KySu {
+        -nganhdaotao: String
+        +inTTin()
+    }
+
+    class NhanVienCB {
+        -congviec: String
+        +inTTin()
+    }
+
+    class QLCB {
+        +danhsach: List
+        +addCB(canbo: CanBo)
+        +timKiem(ten: String)
+        +hienthids()
+    }
+
+    CanBo <|-- CongNhan
+    CanBo <|-- KySu
+    CanBo <|-- NhanVienCB
+    QLCB "1" o-- "0..*" CanBo : quan_ly
