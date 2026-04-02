@@ -1,79 +1,35 @@
 ``` mermaid
-%%{init: {'theme': 'dark', 'themeVariables': { 'fontSize': '16px'}}}%%
-classDiagram
-direction TB
+graph TD
+    %% Định nghĩa các lớp
+    HH[<b>HangHoa</b><br/>#ma_hang, #ten_hang, #gia<br/>+in_ttin]
+    DM[<b>HangDienMay</b><br/>-tg_baohanh, -dien_ap<br/>+in_ttin]
+    SS[<b>HangSanhSu</b><br/>-loai_nguyenlieu<br/>+in_ttin]
+    TP[<b>HangThucPham</b><br/>-ngay_sx, -ngay_hethan<br/>+in_ttin]
+    QL[<b>QLHangHoa</b><br/>+List danh_sach<br/>+them_hang, +tim_kiem]
 
-class HangHoa {
-    #ma_hang: String
-    #ten_hang: String
-    #nha_sx: String
-    #gia: float
-    +in_ttin()
-}
+    %% Quan hệ
+    HH <|-- DM
+    HH <|-- SS
+    HH <|-- TP
+    QL o-- HH
+    
+    %% Định dạng màu sắc cho dễ nhìn
+    style HH fill:#f9f,stroke:#333,stroke-width:2px
+    style QL fill:#bbf,stroke:#333,stroke-width:2px
+graph TD
+    %% Định nghĩa các lớp
+    CB[<b>CanBo</b><br/>-hoten, -tuoi, -diachi<br/>+get_hoten, +inTTin]
+    CN[<b>CongNhan</b><br/>-bac<br/>+inTTin]
+    KS[<b>KySu</b><br/>-nganhdaotao<br/>+inTTin]
+    NV[<b>NhanVienCB</b><br/>-congviec<br/>+inTTin]
+    QL[<b>QLCB</b><br/>+List danhsach<br/>+addCB, +timKiem]
 
-class HangDienMay {
-    -tg_baohanh: int
-    -dien_ap: int
-    -cong_suat: int
-    +in_ttin()
-}
+    %% Quan hệ
+    CB <|-- CN
+    CB <|-- KS
+    CB <|-- NV
+    QL o-- CB
 
-class HangSanhSu {
-    -loai_nguyenlieu: String
-    +in_ttin()
-}
-
-class HangThucPham {
-    -ngay_sx: String
-    -ngay_hethan: String
-    +in_ttin()
-}
-
-class QLHangHoa {
-    +danh_sach: List
-    +them_hang(hang: HangHoa)
-    +hien_thi()
-    +tim_kiem(ten_tim: String)
-}
-
-HangHoa <|-- HangDienMay
-HangHoa <|-- HangSanhSu
-HangHoa <|-- HangThucPham
-QLHangHoa "1" o-- "0..*" HangHoa : quan_ly
-
-
-class CanBo {
-    -hoten: String
-    -tuoi: int
-    -gioitinh: String
-    -diachi: String
-    +get_hoten(): String
-    +inTTin()
-}
-
-class CongNhan {
-    -bac: int
-    +inTTin()
-}
-
-class KySu {
-    -nganhdaotao: String
-    +inTTin()
-}
-
-class NhanVienCB {
-    -congviec: String
-    +inTTin()
-}
-
-class QLCB {
-    +danhsach: List
-    +addCB(canbo: CanBo)
-    +timKiem(ten: String)
-    +hienthids()
-}
-
-CanBo <|-- CongNhan
-CanBo <|-- KySu
-CanBo <|-- NhanVienCB
-QLCB "1" o-- "0..*" CanBo : quan_ly
+    %% Định dạng màu sắc
+    style CB fill:#f96,stroke:#333,stroke-width:2px
+    style QL fill:#9f9,stroke:#333,stroke-width:2px
