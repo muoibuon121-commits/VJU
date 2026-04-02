@@ -1,9 +1,9 @@
-```mermaid
+``` mermaid
 %%{init: {'theme': 'dark', 'themeVariables': { 'fontSize': '16px'}}}%%
 classDiagram
 direction TB
 
-class "HangHoa" as HangHoa {
+class HangHoa {
     #ma_hang: String
     #ten_hang: String
     #nha_sx: String
@@ -11,25 +11,25 @@ class "HangHoa" as HangHoa {
     +in_ttin()
 }
 
-class "HangDienMay" as HangDienMay {
+class HangDienMay {
     -tg_baohanh: int
     -dien_ap: int
     -cong_suat: int
     +in_ttin()
 }
 
-class "HangSanhSu" as HangSanhSu {
+class HangSanhSu {
     -loai_nguyenlieu: String
     +in_ttin()
 }
 
-class "HangThucPham" as HangThucPham {
+class HangThucPham {
     -ngay_sx: String
     -ngay_hethan: String
     +in_ttin()
 }
 
-class "QLHangHoa" as QLHangHoa {
+class QLHangHoa {
     +danh_sach: List
     +them_hang(hang: HangHoa)
     +hien_thi()
@@ -42,7 +42,7 @@ HangHoa <|-- HangThucPham
 QLHangHoa "1" o-- "0..*" HangHoa : quan_ly
 
 
-class "CanBo" as CanBo {
+class CanBo {
     -hoten: String
     -tuoi: int
     -gioitinh: String
@@ -51,22 +51,22 @@ class "CanBo" as CanBo {
     +inTTin()
 }
 
-class "CongNhan" as CongNhan {
+class CongNhan {
     -bac: int
     +inTTin()
 }
 
-class "KySu" as KySu {
+class KySu {
     -nganhdaotao: String
     +inTTin()
 }
 
-class "NhanVienCB" as NhanVienCB {
+class NhanVienCB {
     -congviec: String
     +inTTin()
 }
 
-class "QLCB" as QLCB {
+class QLCB {
     +danhsach: List
     +addCB(canbo: CanBo)
     +timKiem(ten: String)
