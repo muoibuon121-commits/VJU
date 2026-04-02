@@ -38,9 +38,8 @@
 - Name: Trần Ngô Tiến Đạt
 - VJU's ID: 25112231
 - DM: None
-```mermaid
+``` mermaid
 classDiagram
-    %% Khối Quản lý Hàng hóa
     class HangHoa {
         #String _ma_hang
         #String _ten_hang
@@ -48,25 +47,21 @@ classDiagram
         #float _gia
         +in_ttin()
     }
-
     class HangDienMay {
         -int __tg_baohanh
         -int __dien_ap
         -int __cong_suat
         +in_ttin()
     }
-
     class HangSanhSu {
         -String __loai_nguyenlieu
         +in_ttin()
     }
-
     class HangThucPham {
         -String __ngay_sx
         -String __ngay_hethan
         +in_ttin()
     }
-
     class QLHangHoa {
         +List danh_sach
         +them_hang(HangHoa hang)
@@ -78,8 +73,9 @@ classDiagram
     HangHoa <|-- HangSanhSu
     HangHoa <|-- HangThucPham
     QLHangHoa "1" o-- "0..*" HangHoa : quản lý
-
-    %% Khối Quản lý Cán bộ
+```
+``` mermaid
+classDiagram
     class CanBo {
         -String __hoten
         -int __tuoi
@@ -88,22 +84,18 @@ classDiagram
         +get_hoten() String
         +inTTin()
     }
-
     class CongNhan {
         -int __bac
         +inTTin()
     }
-
     class KySu {
         -String __nganhdaotao
         +inTTin()
     }
-
     class NhanVienCB {
         -String __congviec
         +inTTin()
     }
-
     class QLCB {
         +List danhsach
         +addCB(CanBo canbo)
