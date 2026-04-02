@@ -1,31 +1,36 @@
 ``` mermaid
 classDiagram
     direction TB
-    class HangHoa {
-        #String _ma_hang
-        #String _ten_hang
-        #float _gia
-        +in_ttin()
+    class Product {
+        #String productId
+        #String productName
+        #String manufacturer
+        #float price
+        +showInfo()
     }
-    class HangDienMay {
-        -int __tg_baohanh
-        -int __dien_ap
-        +in_ttin()
+    class ElectronicProduct {
+        -int warrantyMonths
+        -int voltage
+        -int power
+        +showInfo()
     }
-    class HangSanhSu {
-        -String __loai_nguyenlieu
-        +in_ttin()
+    class CeramicProduct {
+        -String materialType
+        +showInfo()
     }
-    class HangThucPham {
-        -String __ngay_hethan
-        +in_ttin()
+    class FoodProduct {
+        -String mfgDate
+        -String expiryDate
+        +showInfo()
     }
-    class QLHangHoa {
-        +List danh_sach
-        +them_hang(HangHoa)
+    class ProductManager {
+        +List productList
+        +addProduct(Product p)
+        +showAll()
+        +search(String name)
     }
 
-    HangHoa <|-- HangDienMay : Thừa kế
-    HangHoa <|-- HangSanhSu : Thừa kế
-    HangHoa <|-- HangThucPham : Thừa kế
-    QLHangHoa o-- HangHoa : Quản lý
+    Product <|-- ElectronicProduct : Inheritance
+    Product <|-- CeramicProduct : Inheritance
+    Product <|-- FoodProduct : Inheritance
+    ProductManager "1" o-- "0..*" Product : Aggregation
