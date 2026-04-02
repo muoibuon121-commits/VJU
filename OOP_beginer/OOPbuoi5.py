@@ -1,8 +1,5 @@
 import copy
 
-# ==========================================
-# PHAN 1: QUAN LY HANG HOA
-# ==========================================
 class HangHoa:
     def __init__(self, ma_hang="", ten_hang="", nha_sx="", gia=0.0):
         self._ma_hang = ma_hang
@@ -11,8 +8,8 @@ class HangHoa:
         self._gia = gia
 
     def in_ttin(self):
-        print(f"Ma: {self._ma_hang} | Ten: {self._ten_hang} | "
-              f"NSX: {self._nha_sx} | Gia: {self._gia:,.0f} VND")
+        print(f"Mã: {self._ma_hang} | Tên: {self._ten_hang} | "
+              f"NSX: {self._nha_sx} | Giá: {self._gia:,.0f} VNĐ")
 
 
 class HangDienMay(HangHoa):
@@ -25,7 +22,7 @@ class HangDienMay(HangHoa):
 
     def in_ttin(self):
         super().in_ttin()
-        print(f"  -> Bao hanh: {self.__tg_baohanh} thang | "
+        print(f"  -> Bảo hành: {self.__tg_baohanh} tháng | "
               f"{self.__dien_ap}V - {self.__cong_suat}W")
 
 
@@ -37,7 +34,7 @@ class HangSanhSu(HangHoa):
 
     def in_ttin(self):
         super().in_ttin()
-        print(f"  -> Nguyen lieu: {self.__loai_nguyenlieu}")
+        print(f"  -> Nguyên liệu: {self.__loai_nguyenlieu}")
 
 
 class HangThucPham(HangHoa):
@@ -49,7 +46,7 @@ class HangThucPham(HangHoa):
 
     def in_ttin(self):
         super().in_ttin()
-        print(f"  -> Ngay SX: {self.__ngay_sx} | HSD: {self.__ngay_hethan}")
+        print(f"  -> Ngày SX: {self.__ngay_sx} | HSD: {self.__ngay_hethan}")
 
 
 class QLHangHoa:
@@ -58,13 +55,13 @@ class QLHangHoa:
 
     def them_hang(self, hang):
         self.danh_sach.append(hang)
-        print("Them hang hoa thanh cong!")
+        print("Thêm hàng hóa thành công!")
 
     def hien_thi(self):
         if not self.danh_sach:
-            print("Danh sach hang hoa dang trong.")
+            print("Danh sách hàng hóa đang trống.")
             return
-        print("Danh sach hang hoa:")
+        print("Danh sách hàng hóa:")
         for h in self.danh_sach:
             h.in_ttin()
             print("-" * 40)
@@ -73,17 +70,14 @@ class QLHangHoa:
         tu_khoa = ten_tim.strip().lower()
         ket_qua = [h for h in self.danh_sach if tu_khoa in h._ten_hang.lower()]
         if ket_qua:
-            print(f'Ket qua tim kiem "{ten_tim}":')
+            print(f'Kết quả tìm kiếm "{ten_tim}":')
             for h in ket_qua:
                 h.in_ttin()
                 print("-" * 40)
         else:
-            print("Khong tim thay hang hoa phu hop.")
+            print("Không tìm thấy hàng hóa phù hợp.")
 
 
-# ==========================================
-# PHAN 2: QUAN LY CAN BO
-# ==========================================
 class CanBo:
     def __init__(self, hoten="", tuoi=0, gioitinh="", diachi=""):
         self.__hoten = hoten
@@ -94,11 +88,10 @@ class CanBo:
     def get_hoten(self):
         return self.__hoten
 
-    # Đổi inTTin -> inTTin() làm base, lớp con override thống nhất
     def inTTin(self):
-        print("Thong tin can bo:")
-        print(f"  Ho va ten : {self.__hoten} | {self.__gioitinh} | {self.__tuoi} tuoi")
-        print(f"  Dia chi   : {self.__diachi}")
+        print("Thông tin cán bộ:")
+        print(f"  Họ và tên : {self.__hoten} | {self.__gioitinh} | {self.__tuoi} tuổi")
+        print(f"  Địa chỉ   : {self.__diachi}")
 
 
 class CongNhan(CanBo):
@@ -108,12 +101,11 @@ class CongNhan(CanBo):
             self.__bac = bac
         else:
             self.__bac = 0
-            print("Loi: Bac cong nhan phai tu 1 den 10!")
+            print("Lỗi: Bậc công nhân phải từ 1 đến 10!")
 
-    # Override inTTin() thay vi inTTin1() -> nhat quan
     def inTTin(self):
         super().inTTin()
-        print(f"  Bac cong nhan: {self.__bac}")
+        print(f"  Bậc công nhân: {self.__bac}")
 
 
 class KySu(CanBo):
@@ -124,7 +116,7 @@ class KySu(CanBo):
 
     def inTTin(self):
         super().inTTin()
-        print(f"  Nganh dao tao: {self.__nganhdaotao}")
+        print(f"  Ngành đào tạo: {self.__nganhdaotao}")
 
 
 class NhanVien(CanBo):
@@ -135,7 +127,7 @@ class NhanVien(CanBo):
 
     def inTTin(self):
         super().inTTin()
-        print(f"  Cong viec: {self.__congviec}")
+        print(f"  Công việc: {self.__congviec}")
 
 
 class QLCB:
@@ -144,70 +136,67 @@ class QLCB:
 
     def addCB(self, canbo):
         self.danhsach.append(canbo)
-        print("Them can bo thanh cong!")
+        print("Thêm cán bộ thành công!")
 
     def timKiem(self, ten_tim_kiem):
         tu_khoa = ten_tim_kiem.strip().lower()
         ket_qua = [cb for cb in self.danhsach
                    if tu_khoa in cb.get_hoten().lower()]
-        print(f'Ket qua tim kiem cho "{ten_tim_kiem}":')
+        print(f'Kết quả tìm kiếm cho "{ten_tim_kiem}":')
         if ket_qua:
             for cb in ket_qua:
                 cb.inTTin()
                 print("-" * 25)
         else:
-            print("Khong tim thay can bo khop ten nay.")
+            print("Không tìm thấy cán bộ khớp tên này.")
 
     def hienthids(self):
         if not self.danhsach:
-            print("Danh sach hien dang trong.")
+            print("Danh sách hiện đang trống.")
             return
-        print("Danh sach can bo:")
+        print("Danh sách cán bộ:")
         for cb in self.danhsach:
             cb.inTTin()
             print("-" * 25)
 
 
-# ==========================================
-# MENU CHINH
-# ==========================================
 def menu_hang_hoa(ql_hh):
     while True:
         print("\n" + "-" * 35)
-        print("  QUAN LY HANG HOA")
+        print("  QUẢN LÝ HÀNG HÓA")
         print("-" * 35)
-        print("1. Them hang hoa moi")
-        print("2. Tim kiem hang hoa")
-        print("3. Hien thi danh sach")
-        print("0. Quay lai menu chinh")
-        choice = input("Lua chon: ").strip()
+        print("1. Thêm hàng hóa mới")
+        print("2. Tìm kiếm hàng hóa")
+        print("3. Hiển thị danh sách")
+        print("0. Quay lại menu chính")
+        choice = input("Lựa chọn: ").strip()
 
         if choice == '1':
-            print("\n-- Chon loai hang hoa --")
-            print("1. Hang dien may | 2. Hang sanh su | 3. Hang thuc pham")
-            loai = input("Lua chon: ").strip()
+            print("\n-- Chọn loại hàng hóa --")
+            print("1. Hàng điện máy | 2. Hàng sành sứ | 3. Hàng thực phẩm")
+            loai = input("Lựa chọn: ").strip()
             if loai not in ['1', '2', '3']:
-                print("Lua chon khong hop le!")
+                print("Lựa chọn không hợp lệ!")
                 continue
-            ma = input("Ma hang: ")
-            ten = input("Ten hang: ")
-            nsx = input("Nha san xuat: ")
-            gia = float(input("Gia (VND): "))
+            ma = input("Mã hàng: ")
+            ten = input("Tên hàng: ")
+            nsx = input("Nhà sản xuất: ")
+            gia = float(input("Giá (VNĐ): "))
             if loai == '1':
-                bh = int(input("Thoi gian bao hanh (thang): "))
-                dap = int(input("Dien ap (V): "))
-                cs = int(input("Cong suat (W): "))
+                bh = int(input("Thời gian bảo hành (tháng): "))
+                dap = int(input("Điện áp (V): "))
+                cs = int(input("Công suất (W): "))
                 ql_hh.them_hang(HangDienMay(ma, ten, nsx, gia, bh, dap, cs))
             elif loai == '2':
-                nl = input("Loai nguyen lieu: ")
+                nl = input("Loại nguyên liệu: ")
                 ql_hh.them_hang(HangSanhSu(ma, ten, nsx, gia, nl))
             elif loai == '3':
-                ngay_sx = input("Ngay san xuat (dd/mm/yyyy): ")
-                hsd = input("Han su dung (dd/mm/yyyy): ")
+                ngay_sx = input("Ngày sản xuất (dd/mm/yyyy): ")
+                hsd = input("Hạn sử dụng (dd/mm/yyyy): ")
                 ql_hh.them_hang(HangThucPham(ma, ten, nsx, gia, ngay_sx, hsd))
 
         elif choice == '2':
-            ten = input("Nhap ten hang can tim: ")
+            ten = input("Nhập tên hàng cần tìm: ")
             ql_hh.tim_kiem(ten)
 
         elif choice == '3':
@@ -216,43 +205,43 @@ def menu_hang_hoa(ql_hh):
         elif choice == '0':
             break
         else:
-            print("Vui long nhap lai!")
+            print("Vui lòng nhập lại!")
 
 
 def menu_can_bo(ql_cb):
     while True:
         print("\n" + "-" * 35)
-        print("  QUAN LY CAN BO")
+        print("  QUẢN LÝ CÁN BỘ")
         print("-" * 35)
-        print("1. Them moi can bo")
-        print("2. Tim kiem theo ho ten")
-        print("3. Hien thi danh sach")
-        print("0. Quay lai menu chinh")
-        choice = input("Lua chon: ").strip()
+        print("1. Thêm mới cán bộ")
+        print("2. Tìm kiếm theo họ tên")
+        print("3. Hiển thị danh sách")
+        print("0. Quay lại menu chính")
+        choice = input("Lựa chọn: ").strip()
 
         if choice == '1':
-            print("\n-- Chon loai can bo --")
-            print("1. Cong nhan | 2. Ky su | 3. Nhan vien")
-            loai = input("Lua chon: ").strip()
+            print("\n-- Chọn loại cán bộ --")
+            print("1. Công nhân | 2. Kỹ sư | 3. Nhân viên")
+            loai = input("Lựa chọn: ").strip()
             if loai not in ['1', '2', '3']:
-                print("Lua chon khong hop le!")
+                print("Lựa chọn không hợp lệ!")
                 continue
-            hoten = input("Ho va ten: ")
-            tuoi = int(input("Tuoi: "))
-            gioitinh = input("Gioi tinh: ")
-            diachi = input("Dia chi: ")
+            hoten = input("Họ và tên: ")
+            tuoi = int(input("Tuổi: "))
+            gioitinh = input("Giới tính: ")
+            diachi = input("Địa chỉ: ")
             if loai == '1':
-                bac = int(input("Bac cong nhan (1-10): "))
+                bac = int(input("Bậc công nhân (1-10): "))
                 ql_cb.addCB(CongNhan(hoten, tuoi, gioitinh, diachi, bac))
             elif loai == '2':
-                nganh = input("Nganh dao tao: ")
+                nganh = input("Ngành đào tạo: ")
                 ql_cb.addCB(KySu(hoten, tuoi, gioitinh, diachi, nganh))
             elif loai == '3':
-                viec = input("Cong viec: ")
+                viec = input("Công việc: ")
                 ql_cb.addCB(NhanVien(hoten, tuoi, gioitinh, diachi, viec))
 
         elif choice == '2':
-            ten = input("Nhap ten can bo can tim: ")
+            ten = input("Nhập tên cán bộ cần tìm: ")
             ql_cb.timKiem(ten)
 
         elif choice == '3':
@@ -261,7 +250,7 @@ def menu_can_bo(ql_cb):
         elif choice == '0':
             break
         else:
-            print("Vui long nhap lai!")
+            print("Vui lòng nhập lại!")
 
 
 def main():
@@ -270,22 +259,22 @@ def main():
 
     while True:
         print("\n" + "=" * 35)
-        print("   CHUONG TRINH QUAN LY TONG HOP")
+        print("   CHƯƠNG TRÌNH QUẢN LÝ TỔNG HỢP")
         print("=" * 35)
-        print("1. Quan ly Hang Hoa")
-        print("2. Quan ly Can Bo")
-        print("3. Thoat")
-        choice = input("Lua chon: ").strip()
+        print("1. Quản lý Hàng Hóa")
+        print("2. Quản lý Cán Bộ")
+        print("3. Thoát")
+        choice = input("Lựa chọn: ").strip()
 
         if choice == '1':
             menu_hang_hoa(ql_hh)
         elif choice == '2':
             menu_can_bo(ql_cb)
         elif choice == '3':
-            print("Thoat chuong trinh. Tam biet!")
+            print("Thoát chương trình. Tạm biệt!")
             break
         else:
-            print("Vui long nhap lai!")
+            print("Vui lòng nhập lại!")
 
 
 if __name__ == "__main__":
