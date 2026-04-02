@@ -1,14 +1,13 @@
 import random
 
-
-RANKS = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-SUITS = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
-SUIT_SYMBOL = {'Spades': '♠', 'Hearts': '♥', 'Diamonds': '♦', 'Clubs': '♣'}
+THU_TU = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+CHAT_BAI = ['Bích', 'Cơ', 'Rô', 'Chuồn']
+BIEU_TUONG = {'Bích': '♠', 'Cơ': '♥', 'Rô': '♦', 'Chuồn': '♣'}
 
 class Card:
     def __init__(self, rank, suit, face_up=True):
-        self.__rank = rank        # '2'..'A'
-        self.__suit = suit        # 'Spades','Hearts','Diamonds','Clubs'
+        self.__rank = rank      
+        self.__suit = suit        
         self.__face_up = face_up
 
     def get_rank(self):
@@ -24,9 +23,8 @@ class Card:
         self.__face_up = not self.__face_up
 
     def compareTo(self, other):
-        """So sánh theo thứ tự rank. Trả về -1, 0, hoặc 1."""
-        r1 = RANKS.index(self.__rank)
-        r2 = RANKS.index(other.__rank)
+        r1 = THU_TU.index(self.__rank)
+        r2 = THU_TU.index(other.__rank)
         if r1 < r2:
             return -1
         elif r1 > r2:
@@ -36,14 +34,14 @@ class Card:
     def __str__(self):
         if not self.__face_up:
             return "[??]"
-        return f"{self.__rank}{SUIT_SYMBOL[self.__suit]}"
+        return f"{self.__rank}{BIEU_TUONG[self.__suit]}"
 
     def __repr__(self):
         return self.__str__()
 
 class Hand:
     def __init__(self):
-        self.__cards = []   # Tối đa 2 lá (Texas Hold'em hole cards)
+        self.__cards = []
 
     def add_card(self, card):
         if len(self.__cards) < 2:
@@ -54,11 +52,10 @@ class Hand:
 
     @property
     def value(self):
-        """Tổng giá trị rank của 2 lá bài trong tay."""
         total = 0
         for c in self.__cards:
-            idx = RANKS.index(c.get_rank())
-            total += idx + 2   # '2'=2, ..., 'A'=14
+            idx = THU_TU.index(c.get_rank())
+            total += idx + 2
         return total
 
     def compareTo(self, other_hand):
@@ -73,7 +70,7 @@ class Hand:
 
     def __str__(self):
         if not self.__cards:
-            return "[Tay trong]"
+            return "[Tay trống]"
         return " ".join(str(c) for c in self.__cards)
 
 
@@ -83,21 +80,18 @@ class Deck:
         self.reset()
 
     def reset(self):
-        """Tạo lại bộ bài 52 lá."""
-        self.__cards = [Card(r, s) for s in SUITS for r in RANKS]
+        self.__cards = [Card(r, s) for s in CHAT_BAI for r in THU_TU]
 
     def shuffle(self):
         random.shuffle(self.__cards)
 
     def deal(self, player):
-        """Chia 2 lá cho player."""
         player.hand.clear()
         for _ in range(2):
             if self.__cards:
                 player.hand.add_card(self.__cards.pop())
 
     def topCard(self):
-        """Lấy lá bài trên cùng."""
         if self.__cards:
             return self.__cards.pop()
         return None
@@ -105,10 +99,6 @@ class Deck:
     def cards_left(self):
         return len(self.__cards)
 
-
-# ==========================================
-# CLASS: Player (base)
-# ==========================================
 class Player:
     def __init__(self, name, chips=1000):
         self.__name = name
@@ -117,7 +107,6 @@ class Player:
         self.__hand = Hand()
         self.__is_in_play = True
 
-    # --- Properties ---
     @property
     def name(self):
         return self.__name
@@ -138,7 +127,6 @@ class Player:
     def isInPlay(self):
         return self.__is_in_play
 
-    # --- Actions ---
     def bet_chips(self, amount):
         amount = min(amount, self.__chips)
         self.__chips -= amount
@@ -146,7 +134,7 @@ class Player:
         return amount
 
     def check(self):
-        print(f"  {self.__name} CHECK.")
+        print(f"  {self.__name} KIỂM TRA (CHECK).")
 
     def call(self, current_bet):
         to_call = current_bet - self.__bet
@@ -154,16 +142,16 @@ class Player:
             self.check()
             return 0
         paid = self.bet_chips(to_call)
-        print(f"  {self.__name} CALL {paid} chip.")
+        print(f"  {self.__name} THEO (CALL) {paid} chip.")
         return paid
 
     def fold(self):
         self.__is_in_play = False
-        print(f"  {self.__name} FOLD.")
+        print(f"  {self.__name} BỎ BÀI (FOLD).")
 
     def raise_bet(self, amount):
         paid = self.bet_chips(amount)
-        print(f"  {self.__name} RAISE them {paid} chip.")
+        print(f"  {self.__name} TỐ THÊM (RAISE) {paid} chip.")
         return paid
 
     def clear(self):
@@ -175,73 +163,67 @@ class Player:
         self.__chips += amount
 
     def __str__(self):
-        status = "ACTIVE" if self.__is_in_play else "FOLD"
-        return (f"{self.__name} | Chips: {self.__chips} | "
-                f"Bet: {self.__bet} | Tay: {self.__hand} | [{status}]")
+        status = "ĐANG CHƠI" if self.__is_in_play else "ĐÃ BỎ"
+        return (f"{self.__name} | Chip: {self.__chips} | "
+                f"Cược: {self.__bet} | Tay: {self.__hand} | [{status}]")
 
 
-# ==========================================
-# CLASS: HumanPlayer
-# ==========================================
 class HumanPlayer(Player):
     def __init__(self, name, chips=1000):
         super().__init__(name, chips)
 
     def make_move(self, current_bet):
-        """Người chơi nhập hành động từ bàn phím."""
-        print(f"\n  [{self.name}] Tay bai: {self.hand} | Chips: {self.chips} | Bet hien tai: {current_bet}")
+        print(f"\n  [{self.name}] Bài trên tay: {self.hand} | Chip hiện có: {self.chips} | Cược hiện tại: {current_bet}")
         while True:
             if current_bet > self.bet:
-                print("  Hanh dong: (1) Call  (2) Raise  (3) Fold")
-                choice = input("  Lua chon: ").strip()
+                print("  Hành động: (1) Theo (Call)  (2) Tố thêm (Raise)  (3) Bỏ bài (Fold)")
+                choice = input("  Lựa chọn của bạn: ").strip()
                 if choice == '1':
                     return self.call(current_bet)
                 elif choice == '2':
                     try:
-                        amt = int(input("  Raise them bao nhieu? "))
+                        amt = int(input("  Bạn muốn tố thêm bao nhiêu? "))
                         self.call(current_bet)
                         return self.raise_bet(amt)
                     except ValueError:
-                        print("  Nhap so nguyen hop le!")
+                        print("  Vui lòng nhập số nguyên hợp lệ!")
                 elif choice == '3':
                     self.fold()
                     return 0
                 else:
-                    print("  Lua chon khong hop le!")
+                    print("  Lựa chọn không hợp lệ!")
             else:
-                print("  Hanh dong: (1) Check  (2) Raise  (3) Fold")
-                choice = input("  Lua chon: ").strip()
+                print("  Hành động: (1) Kiểm tra (Check)  (2) Tố thêm (Raise)  (3) Bỏ bài (Fold)")
+                choice = input("  Lựa chọn của bạn: ").strip()
                 if choice == '1':
                     self.check()
                     return 0
                 elif choice == '2':
                     try:
-                        amt = int(input("  Raise them bao nhieu? "))
+                        amt = int(input("  Bạn muốn tố thêm bao nhiêu? "))
                         return self.raise_bet(amt)
                     except ValueError:
-                        print("  Nhap so nguyen hop le!")
+                        print("  Vui lòng nhập số nguyên hợp lệ!")
                 elif choice == '3':
                     self.fold()
                     return 0
                 else:
-                    print("  Lua chon khong hop le!")
+                    print("  Lựa chọn không hợp lệ!")
 
 class ComputerPlayer(Player):
     def __init__(self, name, chips=1000, difficulty=1):
         super().__init__(name, chips)
-        self.__difficulty = difficulty  # 1=Easy, 2=Medium, 3=Hard
+        self.__difficulty = difficulty
 
     @property
     def difficulty(self):
         return self.__difficulty
 
     def make_move(self, current_bet):
-        """AI tự động quyết định dựa trên difficulty và hand value."""
         hand_val = self.hand.value
         to_call = current_bet - self.bet
 
         if self.__difficulty == 1:
-            # Easy: call nếu hand value >= 10, ngược lại fold
             if hand_val >= 10:
                 return self.call(current_bet)
             else:
@@ -249,7 +231,6 @@ class ComputerPlayer(Player):
                 return 0
 
         elif self.__difficulty == 2:
-            # Medium: raise nếu hand mạnh, call bình thường, fold nếu yếu
             if hand_val >= 22:
                 self.call(current_bet)
                 return self.raise_bet(50)
@@ -260,7 +241,6 @@ class ComputerPlayer(Player):
                 return 0
 
         else:
-            # Hard: chiến lược tích cực hơn
             if hand_val >= 24:
                 self.call(current_bet)
                 return self.raise_bet(100)
@@ -276,7 +256,7 @@ class ComputerPlayer(Player):
 class PokerGame:
     def __init__(self, players):
         if not (2 <= len(players) <= 8):
-            raise ValueError("Can tu 2 den 8 nguoi choi!")
+            raise ValueError("Cần từ 2 đến 8 người chơi!")
         self.__players = players
         self.__current_player = 0
         self.__deck = Deck()
@@ -286,16 +266,14 @@ class PokerGame:
         print(char * length)
 
     def __collect_antes(self, ante=10):
-        """Thu ante (tien cuoc ban dau) truoc khi chia bai."""
         pot = 0
-        print(f"\n  [ANTE: {ante} chip moi nguoi]")
+        print(f"\n  [TIỀN SÀN: {ante} chip mỗi người]")
         for p in self.__players:
             paid = p.bet_chips(ante)
             pot += paid
         return pot
 
     def __deal_hands(self):
-        """Chia bai cho tat ca nguoi choi."""
         self.__deck.reset()
         self.__deck.shuffle()
         for p in self.__players:
@@ -303,7 +281,6 @@ class PokerGame:
             self.__deck.deal(p)
 
     def __betting_round(self, pot, current_bet=0):
-        """Vong cuoc: moi nguoi choi lan luot hanh dong."""
         active = [p for p in self.__players if p.isInPlay]
         if len(active) <= 1:
             return pot, current_bet
@@ -311,62 +288,53 @@ class PokerGame:
         for p in active:
             if not p.isInPlay:
                 continue
-            if isinstance(p, HumanPlayer):
-                added = p.make_move(current_bet)
-            else:
-                added = p.make_move(current_bet)
-            # Cập nhật current_bet nếu raise
+            added = p.make_move(current_bet)
             if p.bet > current_bet:
                 current_bet = p.bet
             pot += added
         return pot, current_bet
 
     def __showdown(self, pot):
-        """So bai va tim nguoi thang."""
         self.__print_separator()
-        print("  SHOWDOWN!")
+        print("  NGỬA BÀI (SHOWDOWN)!")
         active = [p for p in self.__players if p.isInPlay]
 
         if len(active) == 1:
             winner = active[0]
-            print(f"  Tat ca da fold! {winner.name} thang!")
+            print(f"  Tất cả đã bỏ bài! {winner.name} thắng!")
         else:
             for p in active:
-                print(f"  {p.name}: {p.hand} (Value: {p.hand.value})")
+                print(f"  {p.name}: {p.hand} (Giá trị: {p.hand.value})")
             winner = max(active, key=lambda p: p.hand.value)
-            print(f"\n  >>> {winner.name} THANG vong nay! <<<")
+            print(f"\n  >>> {winner.name} THẮNG ván này! <<<")
 
         winner.win_pot(pot)
-        print(f"  {winner.name} nhan {pot} chips!")
+        print(f"  {winner.name} nhận được {pot} chip!")
         return winner
 
     def play_round(self):
         self.__round += 1
         self.__print_separator()
-        print(f"  VONG {self.__round}")
+        print(f"  VÁN THỨ {self.__round}")
         self.__print_separator()
 
-        # 1. Thu ante & chia bai
         pot = self.__collect_antes(ante=10)
         self.__deal_hands()
 
-        print("\n  [BAI DA CHIA]")
+        print("\n  [BÀI ĐÃ CHIA]")
         for p in self.__players:
             if isinstance(p, HumanPlayer):
                 print(f"  {p.name}: {p.hand}")
             else:
                 print(f"  {p.name}: [?? ??]")
 
-        # 2. Vong cuoc 1
-        print("\n--- VONG CUOC 1 ---")
+        print("\n--- VÒNG CƯỢC 1 ---")
         pot, current_bet = self.__betting_round(pot, current_bet=10)
 
-        # 3. Loai nguoi het chips
         active = [p for p in self.__players if p.isInPlay]
         if len(active) < 2:
             return self.__showdown(pot)
 
-        # 4. Showdown
         return self.__showdown(pot)
 
     def __remove_broke_players(self):
@@ -374,54 +342,51 @@ class PokerGame:
         self.__players = [p for p in self.__players if p.chips > 0]
         removed = before - len(self.__players)
         if removed:
-            print(f"  [{removed} nguoi choi het chips da bi loai]")
+            print(f"  [{removed} người chơi hết chip đã bị loại]")
 
     def start(self):
         self.__print_separator('=', 50)
-        print("   CHAO MUNG DEN VOI POKER!")
+        print("   CHÀO MỪNG ĐẾN VỚI TRÒ CHƠI POKER!")
         self.__print_separator('=', 50)
 
         while True:
-            # Xoa nguoi het chips
             self.__remove_broke_players()
             active = [p for p in self.__players if p.chips > 0]
             if len(active) < 2:
-                print("\n  Chi con 1 nguoi choi, tro choi ket thuc!")
+                print("\n  Chỉ còn 1 người chơi, trò chơi kết thúc!")
                 break
 
-            # Hien thi chips
-            print("\nTrang thai nguoi choi:")
+            print("\nTrạng thái người chơi:")
             for p in self.__players:
-                print(f"  {p.name}: {p.chips} chips")
+                print(f"  {p.name}: {p.chips} chip")
 
             self.play_round()
 
-            # Hoi tiep tuc
-            tiep = input("\nChoi tiep? (y/n): ").strip().lower()
+            tiep = input("\nChơi tiếp ván nữa không? (y/n): ").strip().lower()
             if tiep != 'y':
-                print("\n--- KET THUC TRO CHOI ---")
-                print("Tong ket:")
+                print("\n--- KẾT THÚC TRÒ CHƠI ---")
+                print("Tổng kết:")
                 for p in sorted(self.__players, key=lambda x: x.chips, reverse=True):
-                    print(f"  {p.name}: {p.chips} chips")
+                    print(f"  {p.name}: {p.chips} chip")
                 break
 
 def main():
     print("=" * 50)
-    print("   SETUP GAME POKER")
+    print("   THIẾT LẬP TRÒ CHƠI POKER")
     print("=" * 50)
 
     try:
-        ten = input("Nhap ten nguoi choi: ").strip() or "Player"
-        so_bot = int(input("So may (1-3): ") or "2")
+        ten = input("Nhập tên bạn: ").strip() or "Người chơi"
+        so_bot = int(input("Số lượng máy chơi cùng (1-3): ") or "2")
         so_bot = max(1, min(3, so_bot))
-        do_kho = int(input("Do kho cua may (1=De, 2=TB, 3=Kho): ") or "1")
+        do_kho = int(input("Độ khó của máy (1=Dễ, 2=Trung bình, 3=Khó): ") or "1")
         do_kho = max(1, min(3, do_kho))
     except ValueError:
-        ten, so_bot, do_kho = "Player", 2, 1
+        ten, so_bot, do_kho = "Người chơi", 2, 1
 
     players = [HumanPlayer(ten, chips=500)]
     for i in range(1, so_bot + 1):
-        players.append(ComputerPlayer(f"Bot_{i}", chips=500, difficulty=do_kho))
+        players.append(ComputerPlayer(f"Máy_{i}", chips=500, difficulty=do_kho))
 
     game = PokerGame(players)
     game.start()
