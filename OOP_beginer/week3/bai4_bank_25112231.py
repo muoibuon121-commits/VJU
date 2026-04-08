@@ -10,13 +10,13 @@ class BankAccount:
         
         if opt == "rút":
             if tien > self.so_du:
-                print("❌ Nghèo rồi, không đủ tiền rút!")
+                print(" Nghèo rồi, không đủ tiền rút!")
             else:
                 self.so_du -= tien
-                print(f"✅ Rút thành công. Còn lại: {self.so_du:,.0f}")
+                print(f" Rút thành công. Còn lại: {self.so_du:,.0f}")
         elif opt == "gửi":
             self.so_du += tien
-            print(f"✅ Đã gửi. Số dư mới: {self.so_du:,.0f}")
+            print(f" Đã gửi. Số dư mới: {self.so_du:,.0f}")
 
 if __name__ == '__main__':
     acc = BankAccount("Trần Muối", 1000000)
