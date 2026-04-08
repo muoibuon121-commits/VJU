@@ -5,7 +5,7 @@ class SieuNhan:
         self.mau_sac = mau_sac
 
     def __str__(self):
-        return f"🦁 Gao {self.ten} | Vũ khí: {self.vu_khi} | Màu: {self.mau_sac}"
+        return f"Gao {self.ten} | Vũ khí: {self.vu_khi} | Màu: {self.mau_sac}"
 
 if __name__ == '__main__':
     team = []
