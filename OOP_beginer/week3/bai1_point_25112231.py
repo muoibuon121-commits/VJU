@@ -4,7 +4,7 @@ class Point:
     def __init__(self, x, y):
         self.x = x 
         self.y = y 
-        print(f"📍 Đã tạo điểm tại ({self.x}, {self.y})")
+        print(f" Đã tạo điểm tại ({self.x}, {self.y})")
 
     def distance(self, other_point):
         """Tính khoảng cách đến một object Point khác"""
