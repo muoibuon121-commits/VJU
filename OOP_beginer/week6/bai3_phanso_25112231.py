@@ -92,3 +92,25 @@ class PhanSo:
     
     def __hash__(self):
         return hash((self._tu, self._mau))
+
+
+if __name__ == '__main__':
+    print("1. TẠO VÀ RÚT GỌN PHÂN SỐ")
+    ps1 = PhanSo(4, 6)
+    ps2 = PhanSo(1, 2)
+    ps3 = PhanSo(-10, -5)
+    
+    print(f"ps1 (4/6): {ps1}")
+    print(f"ps2 (1/2): {ps2}")
+    print(f"ps3 (-10/-5): {ps3}")
+    
+    print("\n2. CÁC PHÉP TOÁN CƠ BẢN")
+    print(f"Cộng: {ps1} + {ps2} = {ps1 + ps2}")
+    print(f"Trừ:  {ps1} - {ps2} = {ps1 - ps2}")
+    print(f"Nhân: {ps1} * {ps2} = {ps1 * ps2}")
+    print(f"Chia: {ps1} / {ps2} = {ps1 / ps2}")
+
+    print("\n3. SO SÁNH")
+    ps4 = PhanSo(2, 4)
+    print(f"{ps2} == {ps4} ({ps2 == ps4})")
+    print(f"{ps1} > {ps2} ({ps1 > ps2})")
