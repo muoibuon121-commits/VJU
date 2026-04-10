@@ -1,4 +1,15 @@
 ``` mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#E1F5FE',
+    'primaryTextColor': '#01579B',
+    'primaryBorderColor': '#0288D1',
+    'lineColor': '#0288D1',
+    'fontFamily': 'Arial',
+    'clusterBkg': '#FFFFFF'
+  }
+}}%%
 mindmap
   root((b2b_invoice_system))
     manage.py
